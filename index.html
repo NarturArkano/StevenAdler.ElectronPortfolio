@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'sha256-oaSbwsEbt7YEzeDcsluwmrAe9ShQQhNiGGpILn4nzAg='">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src *; script-src 'self' 'sha256-oaSbwsEbt7YEzeDcsluwmrAe9ShQQhNiGGpILn4nzAg='"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <title>Hello World!</title>
+    <style>
+        footer {
+            position: absolute;
+            text-align: center;
+            bottom: 0;
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+        
+        body {
+            padding-left: 15%;
+            padding-right: 15%;
+        }
+        
+        body,
+        canvas,
+        button {
+            background-color: rgb(171, 5, 32);
+        }
+        
+        body,
+        canvas>*,
+        a,
+        button {
+            color: rgb(21, 36, 74);
+        }
+        
+        h1 {
+            margin: auto;
+            font-size: x-large;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: medium;
+            width: 100%;
+        }
+        
+        .tickerBox {
+            width: 50%;
+            text-align: center;
+            float: left;
+            padding: 5px;
+        }
+        
+        #tickers {
+            text-align: center;
+        }
+        
+        canvas {
+            width: 100px;
+        }
+        
+        #buttonBox {
+            margin-right: 35%;
+            margin-left: 35%;
+            text-align: center;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Live Tickers</h1>
+
+    <div id="tickers">
+        <div class="tickerBox">
+            <h2>Steven Adler</h2>
+            <canvas id='nameCanvas'></canvas>
+        </div>
+        <div id="ticker1">
+        </div>
+        <div id="ticker2">
+        </div>
+        <div id="ticker3">
+        </div>
+    </div>
+
+    <div id="twitter">
+        <!-- Unfinished -->
+    </div>
+
+    <div id='buttonBox'>
+        <button id="screenshotButton"><strong>Take a screenshot</strong></button>
+    </div>
+
+    <footer>
+        <a href="https://github.com/NarturArkano">Github</a>
+        <span>|</span>
+        <a href="https://https://www.linkedin.com/in/steven-adler-creations/">LinkedIn</a>
+        <span>|</span>
+        <a href="mailto: steven@stevenadlercreations.com">Email</a>
+        <span>|</span>
+        <a href="Steven Adler Resume.pdf">Resumé</a>
+    </footer>
+    <script src="./index.js"></script>
+    <script>
+        const axios = require('axios')
+
+        let currencies = []
+
+        renderNameBox()
+
+        axios.get("https://api.nomics.com/v1/currencies/ticker?key=5e2cde9e0d6112de86e9631619015403b59909e2&ids=XTZ,BURST,ADA&interval=1d,30d&convert=USD&per-page=100&page=1 ")
+            .then(response => {
+                //console.log(response.data);
+                currencies = response.data;
+                this.renderBox1(currencies[0]);
+                this.renderBox2(currencies[1]);
+                this.renderBox3(currencies[2]);
+            })
+
+        function renderNameBox() {
+            var QRCode = require('qrcode')
+            canvas = document.getElementById('nameCanvas')
+
+            QRCode.toCanvas(canvas, 'Steven Adler', function(error) {});
+        }
+
+        function renderBox1(currency) {
+            var price = parseFloat(currency.price).toFixed(2)
+            document.getElementById('ticker1').innerHTML = document.getElementById('ticker1').innerHTML + `<div class="tickerBox">
+            <h2>${currency.id}: $${price}</h2>
+            <canvas id='canvas1'></canvas>
+            </div>`
+            this.renderQRCode('canvas1', currency)
+        }
+
+        function renderBox2(currency) {
+            var price = parseFloat(currency.price).toFixed(2)
+
+            document.getElementById('ticker2').innerHTML = document.getElementById('ticker2').innerHTML + `<div class="tickerBox">
+            <h2>${currency.id}: $${price}</h2>
+            <canvas id='canvas2'></canvas>
+            </div>`
+            this.renderQRCode('canvas2', currency)
+        }
+
+        function renderBox3(currency) {
+            var price = parseFloat(currency.price).toFixed(2)
+            document.getElementById('ticker3').innerHTML = document.getElementById('ticker3').innerHTML + `<div class="tickerBox">
+            <h2>${currency.id}: $${price}</h2>
+            <canvas id='canvas3'></canvas>
+            </div>`
+            this.renderQRCode('canvas3', currency)
+        }
+
+        function renderQRCode(canvasName, currency) {
+            var QRCode = require('qrcode')
+
+            var canvas = document.getElementById(canvasName)
+
+            QRCode.toCanvas(canvas, parseFloat(currency.price).toFixed(2), function(error) {});
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{
+    "name": "stevenadler.electronportfolio",
+    "version": "1.0.0",
+    "description": "Hello World!",
+    "main": "main.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/NarturArkano/StevenAdler.ElectronPortfolio.git"
+    },
+    "author": "Steven Adler",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/NarturArkano/StevenAdler.ElectronPortfolio/issues"
+    },
+    "homepage": "https://github.com/NarturArkano/StevenAdler.ElectronPortfolio#readme",
+    "devDependencies": {
+        "electron": "^13.1.5"
+    },
+    "scripts": {
+        "start": "electron ."
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "qrcode": "^1.4.4",
+        "vue-tweet-embed": "^2.4.0"
+    }
+}
