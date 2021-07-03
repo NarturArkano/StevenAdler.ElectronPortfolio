@@ -1,4 +1,4 @@
-Windows 10 64-bit
+Windows 10 64-bit<br>
 Node.js version 12.13.0
 
 # Clone this repository
@@ -6,8 +6,8 @@ git clone https://github.com/NarturArkano/StevenAdler.ElectronPortfolio
 # Go into the repository
 cd StevenAdler.ElectronPortfolio
 # Install dependencies
-npm install
-npm install axios
+npm install<br>
+npm install axios<br>
 npm install --save qrcode
 # Run the app
 npm start
