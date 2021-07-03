@@ -7,6 +7,8 @@ git clone https://github.com/NarturArkano/StevenAdler.ElectronPortfolio
 cd StevenAdler.ElectronPortfolio
 # Install dependencies
 npm install
+npm install axios
+npm install --save qrcode
 # Run the app
 npm start
 
